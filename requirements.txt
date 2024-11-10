@@ -1,1 +1,7 @@
 pandas
+python-dotenv
+langchain
+langchain-community
+langchainhub
+langchain-chroma
+beautifulsoup4
