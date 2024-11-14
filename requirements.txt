@@ -4,7 +4,7 @@ langchain
 langchain-community
 langchainhub
 langchain-chroma
-beautifulsoup4
 langchain_openai
 langchain_core
 langchain_text_splitters
+beautifulsoup4
