@@ -1,0 +1,39 @@
+Billetpriser:
+Billetpriser afhænger af tribune, om man er voksen eller barn og om der er tale om A- eller B-kampe.
+
+Faxe Kondi D1, Voksen, A-kamp: Pris 210,-
+Faxe Kondi D1, Voksen, B-kamp: Pris 145,-
+Faxe Kondi D1, Barn 4-13 år, A-kamp: Pris 85,-
+Faxe Kondi D1, Barn 4-13 år, B-kamp: Pris 60,-
+Faxe Kondi D2, Voksen, A-kamp: Pris 235,-
+Faxe Kondi D2, Voksen, B-kamp: Pris 160,-
+Faxe Kondi D2, Barn 4-13 år, A-kamp: Pris 110,-
+Faxe Kondi D2, Barn 4-13 år, B-kamp: Pris 85,-
+Faxe Kondi D3, Voksen, A-kamp: Pris 210,-
+Faxe Kondi D3, Voksen, B-kamp: Pris 145,-
+Faxe Kondi D3, Barn 4-13 år, A-kamp: Pris 85,-
+Faxe Kondi D3, Barn 4-13 år, B-kamp: Pris 60,-
+Faxe Kondi Familie, Voksen, A-kamp: Pris 210,-
+Faxe Kondi Familie, Voksen, B-kamp: Pris 145,-
+Faxe Kondi Familie, Barn 4-13 år, A-kamp: Pris 85,-
+Faxe Kondi Familie, Barn 4-13 år, B-kamp: Pris 60,-
+C.C. Contractor, Voksen, A-kamp: Pris 135,-
+C.C. Contractor, Voksen, B-kamp: Pris 120,-
+C.C. Contractor, Barn 4-13 år, A-kamp: Pris 85,-
+C.C. Contractor, Barn 4-13 år, B-kamp: Pris 60,-
+AL-Bank, Voksen, A-kamp: Pris 160,-
+AL-Bank, Voksen, B-kamp: Pris 130,-
+AL-Bank, Barn 4-13 år, A-kamp: Pris 85,-
+AL-Bank, Barn 4-13 år, B-kamp: Pris 60,-
+AL-Bank (Udebaneafsnit), Voksen, A-kamp: Pris 135,-
+AL-Bank (Udebaneafsnit),, Voksen, B-kamp: Pris 120,-
+AL-Bank (Udebaneafsnit),, Barn 4-13 år, A-kamp: Pris 85,-
+AL-Bank (Udebaneafsnit),, Barn 4-13 år, B-kamp: Pris 60,-
+Kørestol (AL-Bank), Voksen, A-kamp: Pris 160,-
+Kørestol (AL-Bank), Voksen, B-kamp: Pris 130,-
+Kørestol (AL-Bank), Barn 4-13 år, A-kamp: Pris 85,-
+Kørestol (AL-Bank), Barn 4-13 år, B-kamp: Pris 60,-
+Scan Global, Voksen, A-kamp: Pris 210,-
+Scan Global, Voksen, B-kamp: Pris 145,-
+Scan Global, Barn 4-13 år, A-kamp: Pris 85,-
+Scan Global, Barn 4-13 år, B-kamp: Pris 60,-
