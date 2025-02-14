@@ -22,6 +22,8 @@ collection = db.get_collection("fcm_rag_collection")
 id = "79c12811634c4ee5a8f492c259ddb9f4" #change to see other chunks
 query = {"_id": id}
 
+###make dictionary of all id's to be able to access content with indexes instead of typing actual id string
+
 # Find document
 document = collection.find_one(query)
 
