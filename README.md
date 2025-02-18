@@ -6,3 +6,7 @@
 
 ## Activate venv
 python venv\Scripts\activate
+
+
+## For full access
+Set-ExecutionPolicy Unrestricted -Scope Process

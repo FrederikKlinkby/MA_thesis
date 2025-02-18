@@ -30,20 +30,20 @@ ids = []
 for doc in documents:
     ids.append(doc["_id"])
 
-""" To find page_content of single ids
-doc = collection.find_one({'_id': ids[0]}) # Change to find other docs
 
-if doc:
-  print("Page content:", doc["page_content"])
-
-else:
-  print("Page content not found")
-
- """
-
-###If a text string can be converted to a vector embedding, it is perhaps possible to perform similarity searches in the db:
-query_text = "Hvad koster et sæsonkort?"
+# Converting text query to vector embedding
+query_text = "Hvad er aldersgrænsen for børn?"
 response = openai.embeddings.create(model='text-embedding-3-large', input=query_text)
 query_embedding = response.data[0].embedding
 
-print(query_embedding)
+# Perform similarity search
+results = collection.find(
+    sort={"$vector": query_embedding},
+    limit=4, #query top-k results
+)
+
+# Print results of similarity search
+for doc in results:
+    print(doc.get("page_content", "Content not found"))
+
+
