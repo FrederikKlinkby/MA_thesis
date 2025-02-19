@@ -39,11 +39,12 @@ query_embedding = response.data[0].embedding
 # Perform similarity search
 results = collection.find(
     sort={"$vector": query_embedding},
-    limit=4, #query top-k results
+    limit=3, #query top-k results
 )
 
 # Print results of similarity search
 for doc in results:
-    print(doc.get("page_content", "Content not found"))
-
-
+   content = doc.get("page_content") or doc.get('content', 'Content not found') #In some JSON data points, the key is called 'page_content', in others just 'content'
+   print(content)
+   print(100*"_")
+   
