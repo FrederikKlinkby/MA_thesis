@@ -1,6 +1,5 @@
 pandas
 python-dotenv
-dotenv
 
 langchain
 langchain-community
