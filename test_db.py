@@ -47,4 +47,4 @@ for doc in results:
    content = doc.get("page_content") or doc.get('content', 'Content not found') #In some JSON data points, the key is called 'page_content', in others just 'content'
    print(content)
    print(100*"_")
-   
+
