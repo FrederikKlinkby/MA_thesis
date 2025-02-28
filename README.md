@@ -15,7 +15,7 @@ OPENAI_API_KEY = 'OPENAI_API_KEY'
 
 
 ## Activate venv
-python venv\Scripts\activate
+.\venv\Scripts\Activate.ps1
 
 ## For full access
 Set-ExecutionPolicy Unrestricted -Scope Process

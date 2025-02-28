@@ -48,7 +48,7 @@ def load_split_docs(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size
     return vectorstore
 
 
-vectorstore = load_split_docs(chunk_size=1000, chunk_overlap=200)
+vectorstore = load_split_docs(chunk_size=500, chunk_overlap=150)
 
 system_prompt = (
     "Du er en assistent der skal svare på spørgsmål fra fans af fodboldklubben FC Midtjylland. "
@@ -59,10 +59,10 @@ system_prompt = (
     "Kontekst: {context}"
 )
 
-question = "Hvad koster en billet på faxe-kondi til en A-kamp?"
+question = "Hvad koster en kørestolsbillet?"
 
 # Build and use RAG
-def build_rag(t=0.5, vectorstore=vectorstore, k=3, system_prompt=system_prompt, question=question, search_type="similarity", show_retrieved=False):
+def build_rag(t=0.2, vectorstore=vectorstore, k=3, system_prompt=system_prompt, question=question, search_type="similarity", show_retrieved=False):
     
     # Define LLM
     llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY, temperature=t)
