@@ -44,7 +44,7 @@ def load_split_docs(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size
         print(f"Number of splits: {len(web_docs)}")
         print(f"Number of splits: {len(text_docs)}")
 
-    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY))
+    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY)) #experiment with other embeddings
     return vectorstore
 
 
