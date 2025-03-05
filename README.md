@@ -20,3 +20,6 @@ OPENAI_API_KEY = 'OPENAI_API_KEY'
 
 ### For full access
 Set-ExecutionPolicy Unrestricted -Scope Process
+
+## Use langflow API
+python .\test_flow.py "<query>"

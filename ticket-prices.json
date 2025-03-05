@@ -1,0 +1,229 @@
+{
+    "ticket_prices": [
+        {
+            "tribune": "Faxe Kondi D1",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 210
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 145
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "Faxe Kondi D2",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 235
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 160
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 110
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 85
+                }
+            ]
+        },
+        {
+            "tribune": "Faxe Kondi D3",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 210
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 145
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "Faxe Kondi Familie",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 210
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 145
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "C.C. Contractor",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 135
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 120
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "AL-Bank",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 160
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 130
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "AL-Bank (Udebaneafsnit)",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 135
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 120
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "Kørestol (AL-Bank)",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 160
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 130
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        },
+        {
+            "tribune": "Scan Global",
+            "prices": [
+                {
+                    "age_group": "Voksen",
+                    "match_type": "A-kamp",
+                    "price": 210
+                },
+                {
+                    "age_group": "Voksen", 
+                    "match_type": "B-kamp",
+                    "price": 145
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "A-kamp", 
+                    "price": 85
+                },
+                {
+                    "age_group": "Barn 4-13 år",
+                    "match_type": "B-kamp",
+                    "price": 60
+                }
+            ]
+        }
+    ]
+}
