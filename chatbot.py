@@ -62,7 +62,7 @@ system_prompt = (
 question = "Hvad koster en kørestolsbillet?"
 
 # Build and use RAG
-def build_rag(t=0.2, vectorstore=vectorstore, k=3, system_prompt=system_prompt, question=question, search_type="similarity", show_retrieved=False):
+def build_rag(t=0.2, vectorstore=vectorstore, k=3, system_prompt=system_prompt, question=question, search_type="similarity", show_retrieved=False, q_optim=False):
     
     # Define LLM
     llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY, temperature=t)
@@ -70,6 +70,11 @@ def build_rag(t=0.2, vectorstore=vectorstore, k=3, system_prompt=system_prompt, 
     # Define retriever
     retriever = vectorstore.as_retriever(search_type=search_type, 
                                      search_kwargs={"k": k})
+
+    # Include query optimization
+    #if q_optim: ... https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/expansion/
+    #Build as seperate function to call. Remember to branch out
+
 
     if show_retrieved:
         retrieved_docs = retriever.invoke(question)
