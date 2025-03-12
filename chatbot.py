@@ -72,8 +72,8 @@ def build_rag(t=0.2, vectorstore=vectorstore, k=3, system_prompt=system_prompt, 
                                      search_kwargs={"k": k})
 
     # Include query optimization
-    #if q_optim: ... https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/expansion/
-    #Build as seperate function to call. Remember to branch out
+    # if q_optim: ... https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/expansion/
+    # Build as seperate function to call. Remember to branch out
 
 
     if show_retrieved:
