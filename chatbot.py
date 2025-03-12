@@ -34,7 +34,7 @@ def load_split_docs(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size
     # Combine all docs
     all_docs = web_docs + text_docs
 
-    # Split text
+    #Split text
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap) # Split text
 
     splits = text_splitter.split_documents(all_docs)
