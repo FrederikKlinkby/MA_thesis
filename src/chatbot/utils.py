@@ -1,8 +1,7 @@
 #utils
 import os
 from dotenv import find_dotenv, load_dotenv
-from langchain_core.pydantic_v1 import Field
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from langchain.output_parsers import PydanticToolsParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
@@ -17,15 +16,15 @@ from langchain_openai import ChatOpenAI
 class ParaphrasedQuery(BaseModel):
     """Du har lavet en query expansion af et spørgsmål"""
 
-    paraphrased_query: str = Field(
+    paraphrased_query: list[str] = Field(
         ...,
-        description="En unik omformulering af det originale spørgsmål.",
+        description="Liste af omformulerede spørgsmål, mindst 3 versioner",
     )
 
 
 
 # Function for query optimisation
-def query_optim(question):
+def query_optim(question, print_paraphrased_questions=False) -> list:
     system = """Du er ekspert i at konvertere brugerspørgsmål til database queries.
     Du har adgang til information om billetter, sæsonkort, FAQ og billetpriser på FC Midtjyllands hjemmside.
     
@@ -35,7 +34,7 @@ def query_optim(question):
 
     Hvis der er forkortelser eller ord du ikke kender, forsøg ikke at omformulere dem.
     
-    Returnér 3 versioner af spørgsmålet."""
+    Returnér mindst 3 versioner af spørgsmålet som en liste af strenge."""
 
     prompt = ChatPromptTemplate.from_messages(
     [
@@ -49,8 +48,16 @@ def query_optim(question):
     llm_with_tools = llm.bind_tools([ParaphrasedQuery])
     query_analyzer = prompt | llm_with_tools | PydanticToolsParser(tools=[ParaphrasedQuery])
 
-    # Invoke
-    query_analyzer.invoke({"question": question})
+    # Invoke and get paraphrased queries
+    output = query_analyzer.invoke({"question": question})
+    paraphrased_queries = output[0].paraphrased_query
+    
+    if print_paraphrased_questions:
+        # Print the original and reformulated questions
+        print("\nOriginal question:", question)
+        print("Reformulated questions:")
+        print(paraphrased_queries)
+        for i, reformulation in enumerate(paraphrased_queries, 1):
+            print(f"{i}. {reformulation}")
 
-
-query_optim("Hvordan får jeg billet?")
+    return paraphrased_queries

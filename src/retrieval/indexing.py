@@ -1,14 +1,9 @@
 #File for indexing documents
 import os
 from dotenv import find_dotenv, load_dotenv
-import bs4
-from langchain import hub
-from langchain.chains import create_retrieval_chain, create_history_aware_retriever
-from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import WebBaseLoader, TextLoader
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Load environment files and access OpenAI api key
@@ -50,7 +45,7 @@ def split_data(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000
     return splits
 
 
-# Function for storing splits in vector store
+# Function for storing the splits made in split_data() in a Chroma vector store
 def store_data(splits):
      vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY)) #experiment with other embeddings
      return vectorstore
