@@ -22,4 +22,4 @@ OPENAI_API_KEY = 'OPENAI_API_KEY'
 Set-ExecutionPolicy Unrestricted -Scope Process
 
 ## Use langflow API
-python .\test_flow.py "<query>"
+python src\tests\test_flow.py "<query>"

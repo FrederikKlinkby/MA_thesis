@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "Hvornår åbner billetsalget til x-kampen?",
+        "answer": "Billetsalget til FC Midtjyllands hjemmebanekampe åbner som regel 14 dage før kampene. Du kan se den specifikke åbningsdato for billetsalget på www.fcm.dk."
+    },
+    {
+        "id": 2,
+        "question": "Hvorfor kan jeg ikke købe billet til x-kampen?",
+        "answer": "Som udgangspunkt kan alle købe billet til FC Midtjyllands hjemmebanekampe, men til udvalgte kampe kan der dog af sikkerhedsmæssige årsager være restriktioner på billetsalget, hvilket betyder, at man tidligere skal have købt billet til en af vores kampe for at kunne købe igen. \nDet gør vi for at begrænse muligheden for, at udeholdets fans køber billet til et FCM-afsnit. \n\nDe eventuelle restriktioner vil blive meldt ud i forbindelse med åbningen af billetsalget til de enkelte kampe."
+    },
+    {
+        "id": 3,
+        "question": "Jeg har lagt mine billetter i kurven, men kan ikke gå til betaling.",
+        "answer": "I kurven skal du personliggøre dine billetter ved at tildele hver billet en bruger. Det gør du ved at indtaste dit brugernavn (e-mailadresse) på hver billet i kurven. Du kan også klikke på 'Tildel bruger' og derefter klikke på dit navn i dropdown-menuen. \nNår du har personliggjort alle billetter i kurven, kan du gå videre til betalingen. \nPå dette link finder du en videoguide til hvordan du køber billetter - Klik her for at åbne videoguiden (https://www.youtube.com/watch?v=W7QxKP21vrE)"
+    },
+    {
+        "id": 4,
+        "question": "Hvordan frigiver jeg mit sæsonkort?",
+        "answer": "Du kan frigive dit sæsonkort ved at følge nedenstående guide: \n1. Log ind på billetsalg.fcm.dk med dine kontooplysninger. \n2. Klik på dit navn i øverste højre hjørne og klik på 'Min konto'. \n3. Klik på 'Funktioner' og klik derefter på 'Frigiv plads/konverter til billet'. \n4. Klik på den kamp du ønsker at frigive dit sæsonkort til. \n5. Klik på frigiv plads og Klik 'Ja'. \n6. Dit sæsonkort er nu frigivet til den pågældende kamp. \nPå dette link finder du en videoguide til, hvordan du kan frigive dit sæsonkort - (https://www.youtube.com/watch?v=1cfqL3HluHY) \nNår sæsonkort er frigivet, kan det ikke fortrydes. Frigiver du dit sæsonkort ved en fejl, skal du kontakte billetsalg@fcm.dk hurtigst muligt."
+    },
+    {
+        "id": 5,
+        "question": "Hvordan konverterer jeg mit sæsonkort til en billet?",
+        "answer": "Du kan konvertere dit sæsonkort til en billet ved at følge nedenstående guide: \n1. Log ind på billetsalg.fcm.dk med dine kontooplysninger. \n2. Klik på dit navn i øverste højre hjørne og klik på 'Min konto'. \n3. Klik på 'Funktioner' og klik derefter på 'Frigiv plads/konverter til billet'. \n4. Klik på den kamp du ønsker at konvertere dit sæsonkort til en billet til. \n5. Klik på 'Konverter til billet' og Klik 'Konverter til billet'. \n6. Dit sæsonkort er nu konverteret til en billet til den pågældende kamp. \n7. Klik på 'Hent billetter' og klik på 'download billetter som PDF' for at downloade din billet. Du kan også klikke på 'Send billetter som sms' og indtaste det telefonnummer du ønsker at sende billetten til. \nPå dette link finder du en videoguide til, hvordan du kan konvertere dit sæsonkort til en billet - Klik her for at åbne videoguiden (https://www.youtube.com/watch?v=j-34MJkg5b4)"
+    },
+    {
+        "id": 6,
+        "question": "Hvordan opgraderer jeg mit sæsonkort fra barn til voksen til en specifik kamp?",
+        "answer": "Du kan opgradere dit børnesæsonkort til en voksenbillet til en specifik kamp, ved at følge nedenstående guide: \n1. Log ind på billetsalg.fcm.dk med dine kontooplysninger. \n2. Klik på dit navn i øverste højre hjørne og klik på 'Min konto'. \n3. Klik på 'Funktioner' og klik derefter på 'Frigiv plads/konverter til billet'. \n4. Klik på 'Ændre sæde/opgrader sæsonkort' \n5. Vælg din plads på stadionoversigten. \n6. Klik på pristypen 'Voksen Online' i kurven og klik på 'Næste'. \n7. Betal prisdifferencen. \n8. Klik på 'Hent billetter' og klik på 'download billetter som PDF' for at downloade din billet. Du kan også klikke på 'Send billetter som sms' og indtaste det telefonnummer du ønsker at sende billetten til."
+    },
+    {
+        "id": 7,
+        "question": "Hvordan køber jeg et sæsonkort?",
+        "answer": "Det er ikke længere muligt at købe et sæsonkort til FC Midtjyllands hjemmebanekampe. Du kan i stedet kun købe BilletFlex fra start, og hvis du med BilletFlex kommer til mindst 65% af kampene i en sæson, vil du blive tilbudt at købe et sæsonkort i den efterfølgende sæson. \nOBS. Der er for tiden udsolgt af BilletFlex. Ønsker du at komme på venteliste til at købe BilletFlex, kan du skrive dig op på dette link – www.fcm.dk/venteliste \nVentelisten åbnes løbende."
+    },
+    {
+        "id": 8,
+        "question": "Hvordan køber jeg et BilletFlex abonnement?",
+        "answer": "Der er for tiden udsolgt af BilletFlex. Ønsker du at komme på venteliste til at købe BilletFlex, kan du skrive dig op på dette link – www.fcm.dk/venteliste \nVentelisten åbnes løbende."
+    },
+    {
+        "id": 9,
+        "question": "Hvordan skifter jeg betalingskort på mit abonnement?",
+        "answer": "Du kan skifte betalingskort på dit abonnement ved at følge nedenstående guide: \n1. Log ind på billetsalg.fcm.dk med dine kontooplysninger \n2. Klik på dit navn i øverste højre hjørne \n3. Klik på 'Funktioner' \n4. Klik på 'Min Konto' \n5. Klik på 'Betalingsmetoder' \n6. Klik på 'Tilføj kort' \n7. Indtast dine betalingskortoplysninger og klik på 'Betal' \n8. Skift betalingskortet på dit abonnement under 'Mine abonnementer'. \nPå dette link finder du en videoguide til, hvordan du ændrer dit betalingskort - Klik her for at åbne videoguiden (https://www.youtube.com/watch?v=tkXZcDbQheI) \nHusk at ændre betalingskortet på alle de abonnementer du administrerer betalingen af."
+    },
+    {
+        "id": 10,
+        "question": "Hvordan ændrer jeg mit sæsonkort fra standard til Premium? (eller omvendt)",
+        "answer": "Hvis du ønsker at ændre dit sæsonkort fra standard til Premium eller omvendt, skal du kontakte billetsalg@fcm.dk"
+    }
+]

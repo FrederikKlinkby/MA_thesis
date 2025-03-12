@@ -19,7 +19,7 @@ OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
 
 # Web pages to scrape and billetpriser file path
 web_paths = ['https://www.fcm.dk/billetter/', 'https://www.fcm.dk/saesonkort/', 'https://billetsalg.fcm.dk/CMS?page=FAQ']
-txt_file_path = r'billetpriser.txt'
+txt_file_path = r'data\billetpriser.txt'
 
 
 def load_split_docs(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000, chunk_overlap=200, num_splits=False):
