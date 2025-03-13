@@ -1,18 +1,11 @@
-#utils
-import os
-from dotenv import find_dotenv, load_dotenv
+#utils for chatbot
 from pydantic import BaseModel, Field
 from langchain.output_parsers import PydanticToolsParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-# Load environment files and access OpenAI api key
-#dotenv_path = find_dotenv()
-#load_dotenv(dotenv_path)
 
-#OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
-
-#Fra https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/expansion/
+#From https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/expansion/
 class ParaphrasedQuery(BaseModel):
     """Du har lavet en query expansion af et spørgsmål"""
 
@@ -22,11 +15,10 @@ class ParaphrasedQuery(BaseModel):
     )
 
 
-
 # Function for query optimisation
 def query_optim(question, print_paraphrased_questions=False) -> list:
     system = """Du er ekspert i at konvertere brugerspørgsmål til database queries.
-    Du har adgang til information om billetter, sæsonkort, FAQ og billetpriser på FC Midtjyllands hjemmside.
+    Du har adgang til information om billetter, sæsonkort, FAQ og billetpriser på FC Midtjyllands hjemmeside.
     
     Lav en query expansion. Hvis der er flere måde at formulere brugerens spørgsmål på \
     eller der er synonymer for nøgleord i spørgsmålet, returnér flere versioner af spørgsmålet \
@@ -60,4 +52,5 @@ def query_optim(question, print_paraphrased_questions=False) -> list:
         for i, reformulation in enumerate(paraphrased_queries, 1):
             print(f"{i}. {reformulation}")
 
+    paraphrased_queries = " ".join(paraphrased_queries)
     return paraphrased_queries

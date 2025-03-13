@@ -6,6 +6,7 @@ from langchain_community.document_loaders import WebBaseLoader, TextLoader
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+
 # Load environment files and access OpenAI api key
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -23,7 +24,7 @@ txt_file_path = os.path.join(project_root, "data", "billetpriser.txt")
 # Function for splitting data
 def split_data(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000, chunk_overlap=200, num_splits=False):
     # Load urls
-    web_loader = WebBaseLoader(web_paths=web_paths) #Consider including argument that removes irrelevant text
+    web_loader = WebBaseLoader(web_paths=web_paths) #Consider including argument that removes irrelevant text (fx '\n'). Does not scrape billetsalg.fcm.dk
     web_docs = web_loader.load() # Define docs
 
     # Load text file
@@ -39,15 +40,17 @@ def split_data(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000
     splits = text_splitter.split_documents(all_docs)
 
     if num_splits:
-        print(f"Number of splits: {len(splits)}")
-        print(f"Number of splits: {len(web_docs)}")
-        print(f"Number of splits: {len(text_docs)}")
+        print(f"Number of total splits: {len(splits)}")
+        print(f"Number of web_docs: {len(text_splitter.split_documents(web_docs))}")
+        print(f"Number of text_docs: {len(text_splitter.split_documents(text_docs))}")
     return splits
 
 
 # Function for storing the splits made in split_data() in a Chroma vector store
 def store_data(splits):
-     vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY)) #experiment with other embeddings
-     return vectorstore
+     vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY, model='text-embedding-3-large'))
 
+     if not vectorstore:
+         print('Vectorstore not created')
+     return vectorstore
 
