@@ -13,7 +13,9 @@ db_token = 'db_token'
 
 OPENAI_API_KEY = 'OPENAI_API_KEY'
 
+APPLICATION_TOKEN = 'APPLICATION_TOKEN'
 
+langchain_api_key = 'langchain_api_key'
 
 ## Activate venv
 .\venv\Scripts\Activate.ps1

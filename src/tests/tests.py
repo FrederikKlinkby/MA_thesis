@@ -9,4 +9,3 @@ question = 'Hvordan får jeg billet?'
 
 splits = split_data(web_paths, txt_file_path, chunk_size=1000, chunk_overlap=200)
 vectorstore = store_data(splits)
-retrieve_docs(vectorstore, question, q_expand=False, show_retrieved=True)

@@ -36,7 +36,7 @@ vectorstore = indexing.store_data(splits)
 
 question = "Køb af billetter og gavekort på billetsalg.fcm.dk"
 
-# Build and use RAG
+# chatbot function
 def chatbot(t=0.1, vectorstore=vectorstore, k=3, system_prompt=system_prompt, question=question, 
             search_type="similarity", openai_api_key=OPENAI_API_KEY, q_expand=False, show_retrieved=False):
     
