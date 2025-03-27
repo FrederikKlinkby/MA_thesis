@@ -62,13 +62,13 @@ def calculate_metrics(reference, candidate):
     }
 
 # Test function
-def Test():
+def test():
     df = count_combinations_and_create_df()
     df.to_excel('test.xlsx')
 
 
 # Full experiment function
-def Full_experiment():
+def full_experiment():
     print('Conduncting full experiment. This takes a while...')
 
     question = "Hvornår åbner billetsalget til næste kamp?"
@@ -135,9 +135,9 @@ def main():
     if experiment_type:
         experiment = experiment_type['Type of experiment']
         if experiment == 'Test':
-            Test()
+            test()
         elif experiment == 'Full experiment':
-            Full_experiment()
+            full_experiment()
         else:
             print("Exit")
             exit()
