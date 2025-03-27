@@ -1,6 +1,7 @@
 #base packages
 pandas
 python-dotenv
+openpyxl
 
 #For building RAG
 langchain
@@ -18,3 +19,11 @@ astrapy
 
 #For vector embedding
 openai
+
+#Inquirer
+inquirer
+
+#Metrics for evaluating RAGs
+sacrebleu
+rouge_score
+ragas
