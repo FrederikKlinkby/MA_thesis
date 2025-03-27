@@ -19,12 +19,12 @@ load_dotenv(dotenv_path)
 OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
 
 # Dictionary of settings to loop through
-settings = {'chunk sizes': [400, 600, 800, 1000],
-            'chunk overlaps': [150, 250],
-            'temperature': [0.1, 0.25],
-            'k': [3, 4],
-            'search types': ['similarity', 'mmr'],
-            'query expansion': [True, False]
+settings = {'chunk sizes':      [400, 600, 800, 1000],
+            'chunk overlaps':   [150, 250],
+            'temperature':      [0.1, 0.25],
+            'k':                [3, 4],
+            'search types':     ['similarity', 'mmr'],
+            'query expansion':  [True, False]
             }
 
 

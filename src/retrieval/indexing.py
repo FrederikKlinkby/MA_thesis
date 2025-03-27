@@ -49,6 +49,7 @@ def split_data(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000
         print(f"Number of text_docs: {len(text_splitter.split_documents(text_docs))}")
     return splits
 
+
 # Function for storing the splits made in split_data() in a Chroma vector store
 def store_data(splits):
      vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY, model='text-embedding-3-large'))
