@@ -71,12 +71,14 @@ def calculate_metrics(reference, candidate, question, context) -> dict:
         temperature=0.0,  # low temperature for more deterministic responses
         api_key=OPENAI_API_KEY
     )
-    ## Faithfulness
+
     sample = SingleTurnSample(
         user_input=question,
         response = candidate,
         retrieved_contexts = context
     )
+    
+    ## Faithfulness
     F = Faithfulness(llm=evaluator_llm)
     faithfulness_score = F.score(sample)
 
