@@ -24,6 +24,7 @@ openai
 inquirer
 
 #Metrics for evaluating RAGs
+asyncio #For asyncronuos programming
 sacrebleu
 rouge_score
 ragas

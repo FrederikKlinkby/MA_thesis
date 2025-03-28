@@ -8,10 +8,8 @@ import openpyxl
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.chatbot import chatbot
 import src.retrieval.indexing as indexing
+import utils
 import inquirer
-import sacrebleu
-from rouge_score import rouge_scorer
-from ragas import evaluate #See following for available metrics: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/#agents-or-tool-use-cases
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -29,7 +27,7 @@ settings = {'chunk sizes': [400, 600, 800, 1000],
 
 
 # Count number of combinations in settings
-def count_combinations_and_create_df() -> pd.DataFrame:
+def create_metrics_df() -> pd.DataFrame:
     total_combinations = (
         len(settings['chunk sizes']) * 
         len(settings['chunk overlaps']) * 
@@ -39,43 +37,29 @@ def count_combinations_and_create_df() -> pd.DataFrame:
         len(settings['query expansion'])
     )
 
-    headers = ['BLEU', 'ROUGE-2', 'Faithfulness', 'Answer Relevance', 'Context Relevance']
+    headers = ['ROUGE-2', 'Cosine Similarity' 'Faithfulness', 'Answer Relevance', 'Context Relevance']
     df = pd.DataFrame(index=range(total_combinations), columns=headers)
     return df
 
 
-# Evaluation function
-def calculate_metrics(reference, candidate):
-    # BLEU Score
-    bleu = sacrebleu.metrics.BLEU(effective_order=True) # effective_order = TRUE -> Prevents penalizing the score for n-grams longer than those in the reference
-    bleu_score = bleu.sentence_score(candidate, [reference]).score
-    
-    # ROUGE Scores
-    rouge_scorer_instance = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
-    rouge_scores = rouge_scorer_instance.score(reference, candidate)
-    
-    return {
-        'BLEU': bleu_score,
-        #'ROUGE-1': rouge_scores['rouge1'].fmeasure,
-        'ROUGE-2': rouge_scores['rouge2'].fmeasure,
-        #'ROUGE-L': rouge_scores['rougeL'].fmeasure
-    }
-
 # Test function
-def Test():
-    df = count_combinations_and_create_df()
-    df.to_excel('test.xlsx')
+def test():
+    splits = indexing.split_data(chunk_size=800)
+    vectorstore = indexing.store_data(splits)
+    question = "Hvornår starter billetsalget til næste kamp?"
+    test = chatbot.chatbot(vectorstore, question, 0.1, 3, 'similarity', OPENAI_API_KEY, save_context=True)
+    print(test['context'])
 
 
 # Full experiment function
-def Full_experiment():
-    print('Conduncting full experiment. This takes a while...')
+def full_experiment():
+    print('Conducting full experiment. This takes a while...')
 
-    question = "Hvornår åbner billetsalget til næste kamp?"
+    question = "Hvornår starter billetsalget til næste kamp?"
     reference = "Billetsalget til FC Midtjyllands hjemmebanekampe åbner som regel 14 dage før kampene. Du kan se den specifikke åbningsdato for billetsalget på www.fcm.dk."
 
     #Create empty dataframe for eval metrics
-    metrics = count_combinations_and_create_df()
+    metrics = create_metrics_df()
 
     # Counter to track current row in metrics DataFrame
     row_counter = 0
@@ -104,23 +88,28 @@ def Full_experiment():
                                             t=t,
                                             k=k,
                                             search_type=search_type, 
-                                            q_expand=query_expansion
-                                            )
+                                            q_expand=query_expansion,
+                                            save_context=True)
                             
                             #Calculate metrics
-                            eval_metrics = calculate_metrics(reference, response)
+                            eval_metrics = utils.run_calculate_metrics(
+                                reference=reference,
+                                candidate=response['answer'],
+                                question=question,
+                                context=response['context'])
 
                             #Store metrics in df
-                            metrics.loc[row_counter, ['BLEU', 'ROUGE-2']] = [
-                                eval_metrics['BLEU'], 
-                                eval_metrics['ROUGE-2']
+                            metrics.loc[row_counter, ['ROUGE-2', 'Cosine Similarity', 'Faithfulness']] = [
+                                eval_metrics['ROUGE-2'],
+                                eval_metrics['Cosine Similarity'],
+                                eval_metrics['Faithfulness']
                             ]
 
                             print('Run successful')
 
                             row_counter += 1
-            metrics.to_excel('rag_experiment_metrics.xlsx')
-            return
+                    metrics.to_excel('rag_experiment_metrics.xlsx')
+                    return
 
 # Main menu
 def main():
@@ -135,9 +124,9 @@ def main():
     if experiment_type:
         experiment = experiment_type['Type of experiment']
         if experiment == 'Test':
-            Test()
+            test()
         elif experiment == 'Full experiment':
-            Full_experiment()
+            full_experiment()
         else:
             print("Exit")
             exit()

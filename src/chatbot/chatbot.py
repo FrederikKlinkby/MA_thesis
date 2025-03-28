@@ -12,7 +12,7 @@ import chatbot.utils as utils
 
 # chatbot function
 def chatbot(vectorstore, question, t, k, search_type, openai_api_key, 
-            q_expand=False, show_retrieved=False):
+            q_expand=False, show_retrieved=False, save_context=False):
     """
     Execute a RAG (Retrieval-Augmented Generation) chatbot for answering questions.
 
@@ -72,7 +72,6 @@ def chatbot(vectorstore, question, t, k, search_type, openai_api_key,
         Hvis du ikke kender svaret, sig du ikke kender svaret.
         Brug gerne lange svar. Svar præcist.
 
-
         Kontekst: {context}
         '''
         )
@@ -102,8 +101,17 @@ def chatbot(vectorstore, question, t, k, search_type, openai_api_key,
 
     if show_retrieved:
         retrieved_docs = retriever.invoke(question)
-        retrieved_docs = retrieved_docs[0].page_content #Retrieving only the page_content
+        retrieved_docs = [doc.page_content for doc in retrieved_docs] #Retrieving only the page_content
+        retrieved_docs = '\n'.join(retrieved_docs)
         print(retrieved_docs)
+
+    if save_context:
+        retrieved_docs = retriever.invoke(question)
+        context = [doc.page_content for doc in retrieved_docs] #Retrieving only the page_content 
+        return {
+            "answer": response["answer"],
+            "context": context
+        }
 
     print(response["answer"])
     

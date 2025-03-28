@@ -1,11 +1,12 @@
 #File for indexing documents
 import os
 from dotenv import find_dotenv, load_dotenv
-from langchain_chroma import Chroma
-from langchain_community.document_loaders import WebBaseLoader, TextLoader
-import bs4
-from langchain_openai import OpenAIEmbeddings
+from bs4 import BeautifulSoup
+import requests
+from langchain_community.document_loaders import WebBaseLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
 
 
 # Load environment files and access OpenAI api key
@@ -17,37 +18,45 @@ OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
 # Web pages to scrape
 web_paths = ['https://www.fcm.dk/billetter/', 'https://www.fcm.dk/saesonkort/', 'https://billetsalg.fcm.dk/CMS?page=FAQ']
 
-#billetpriser.txt file path 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-txt_file_path = os.path.join(project_root, "data", "billetpriser.txt")
-
-
 # Function for splitting data
-def split_data(web_paths=web_paths, txt_file_path=txt_file_path, chunk_size=1000, chunk_overlap=200, num_splits=False):
-    # Load urls
-    web_loader = WebBaseLoader(web_paths=web_paths, 
-                               #bs_kwargs={"parse_only": bs4.SoupStrainer(class_=["collapsible-body"])}
-                               ) #Consider including argument that removes irrelevant text (fx '\n').
-    
-    web_docs = web_loader.load() # Define web docs
+def split_data(web_paths=web_paths, chunk_size=1000, chunk_overlap=200, num_splits=False):
 
-    # Load text file
-    text_loader = TextLoader(txt_file_path)
-    text_docs = text_loader.load()
+    # Custom parsing function for complex websites
+    def custom_parse_website(url):
+        # Send request to website
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # For this structure, we'll extract text from collapsible sections
+        content = []
+        
+        collapsible_bodies = soup.find_all('div', class_='collapsible-body')
+        for body in collapsible_bodies:
+            body_text = body.get_text(strip=True)
+            if body_text:
+                content.append(body_text)
+        
+        return ' '.join(content)
 
-    # Combine all docs
-    all_docs = web_docs + text_docs
+    # Custom document loader that uses the custom parsing function
+    class CustomWebLoader(WebBaseLoader):
+        def parse(self, html, **kwargs):
+            # Override the default parsing method
+            return [custom_parse_website(url) for url in self.web_paths]
+
+    # Use the custom web loader
+    web_loader = CustomWebLoader(web_paths=web_paths)
+    web_docs = web_loader.load()
 
     # Split text
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-
-    splits = text_splitter.split_documents(all_docs)
+    splits = text_splitter.split_documents(web_docs)
 
     if num_splits:
-        print(f"Number of total splits: {len(splits)}")
         print(f"Number of web_docs: {len(text_splitter.split_documents(web_docs))}")
-        print(f"Number of text_docs: {len(text_splitter.split_documents(text_docs))}")
+    
     return splits
+
 
 # Function for storing the splits made in split_data() in a Chroma vector store
 def store_data(splits):
