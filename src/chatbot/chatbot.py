@@ -1,13 +1,11 @@
 # .py file for chatbot
-import sys
-import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import chatbot.utils as utils
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import utils
 
 
 # chatbot function

@@ -19,7 +19,7 @@ OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
 web_paths = ['https://www.fcm.dk/billetter/', 'https://www.fcm.dk/saesonkort/', 'https://billetsalg.fcm.dk/CMS?page=FAQ']
 
 # Function for splitting data
-def split_data(web_paths=web_paths, chunk_size=1000, chunk_overlap=200, num_splits=False):
+def split_data(chunk_size, chunk_overlap, web_paths=web_paths, num_splits=False):
 
     # Custom parsing function for complex websites
     def custom_parse_website(url):
@@ -40,7 +40,7 @@ def split_data(web_paths=web_paths, chunk_size=1000, chunk_overlap=200, num_spli
 
     # Custom document loader that uses the custom parsing function
     class CustomWebLoader(WebBaseLoader):
-        def parse(self, html, **kwargs):
+        def parse(self, html, **kwargs): # Is htlm and kwargs necessary?
             # Override the default parsing method
             return [custom_parse_website(url) for url in self.web_paths]
 

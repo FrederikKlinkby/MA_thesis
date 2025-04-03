@@ -1,6 +1,7 @@
-#base packages
+#Base packages
 pandas
 python-dotenv
+numpy
 openpyxl
 
 #For building RAG
@@ -11,6 +12,7 @@ langchain-chroma
 langchain_openai
 langchain_core
 langchain_text_splitters
+langflow
 
 beautifulsoup4
 

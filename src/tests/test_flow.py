@@ -7,6 +7,7 @@ from argparse import RawTextHelpFormatter
 import requests
 from typing import Optional
 import warnings
+import langflow
 
 try:
     from langflow.load import upload_file
