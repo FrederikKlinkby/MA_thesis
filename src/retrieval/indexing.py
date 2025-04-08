@@ -13,7 +13,7 @@ from langchain_openai import OpenAIEmbeddings
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 
-OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Web pages to scrape
 web_paths = ['https://www.fcm.dk/billetter/', 'https://www.fcm.dk/saesonkort/', 'https://billetsalg.fcm.dk/CMS?page=FAQ']

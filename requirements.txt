@@ -12,7 +12,7 @@ langchain-chroma
 langchain_openai
 langchain_core
 langchain_text_splitters
-langflow
+#langflow
 
 beautifulsoup4
 

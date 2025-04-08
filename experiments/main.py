@@ -3,18 +3,18 @@ import sys
 import os
 from dotenv import find_dotenv, load_dotenv
 import pandas as pd
-#import openpyxl
+import inquirer
+import asyncio
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.chatbot import chatbot
 import src.retrieval.indexing as indexing
 import utils
-import inquirer
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 
-OPENAI_API_KEY = os.getenv('OPENAI-API-KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Dictionary of settings to loop through
 settings = {'chunk sizes':      [100, 200, 400, 600, 1000],
@@ -35,7 +35,7 @@ def create_metrics_df() -> pd.DataFrame:
         len(settings['query expansion'])
     )
 
-    headers = ['ROUGE-2', 'Cosine Similarity' 'Faithfulness', 'Answer Relevance', 'Context Relevance']
+    headers = ['ROUGE-2', 'Cosine Similarity', 'Faithfulness', 'Context Relevance']
     df = pd.DataFrame(index=range(total_combinations), columns=headers)
     return df
 
@@ -45,12 +45,11 @@ def test():
     splits = indexing.split_data(chunk_size=800, chunk_overlap=200)
     vectorstore = indexing.store_data(splits)
     question = "Hvornår starter billetsalget til næste kamp?"
-    test = chatbot.chatbot(vectorstore, question, 0.1, 3, 'similarity', OPENAI_API_KEY)
-    print(test['context'])
+    chatbot.chatbot(vectorstore, question, 0.1, 3, 'similarity', OPENAI_API_KEY)
 
 
 # Full experiment function
-def full_experiment():
+async def full_experiment():
     print('Conducting full experiment. This takes a while...')
 
     question = "Hvornår starter billetsalget til næste kamp?"
@@ -90,17 +89,18 @@ def full_experiment():
                                         save_context=True)
                         
                         #Calculate metrics
-                        eval_metrics = utils.run_calculate_metrics(
+                        eval_metrics = await utils.calculate_metrics(
                             reference=reference,
                             candidate=response['answer'],
                             question=question,
                             context=response['context'])
 
                         #Store metrics in df
-                        metrics.loc[row_counter, ['ROUGE-2', 'Cosine Similarity', 'Faithfulness']] = [
+                        metrics.loc[row_counter, ['ROUGE-2', 'Cosine Similarity', 'Faithfulness', 'Context Relevance']] = [
                             eval_metrics['ROUGE-2'],
                             eval_metrics['Cosine Similarity'],
-                            eval_metrics['Faithfulness']
+                            eval_metrics['Faithfulness'],
+                            eval_metrics['Context Relevance']
                         ]
 
                         print('Run successful')
@@ -110,7 +110,7 @@ def full_experiment():
                 return
 
 # Main menu
-def main():
+async def main():
     questions = [
         inquirer.List('Type of experiment',
                       message="What type of experiment would you like to run?",
@@ -124,11 +124,11 @@ def main():
         if experiment == 'Test':
             test()
         elif experiment == 'Full experiment':
-            full_experiment()
+            await full_experiment()
         else:
             print("Exit")
             exit()
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
