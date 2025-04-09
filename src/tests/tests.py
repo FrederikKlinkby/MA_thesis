@@ -5,6 +5,7 @@ from ragas.dataset_schema import SingleTurnSample
 from ragas.metrics import Faithfulness
 import asyncio
 from ragas.integrations.langchain import LangchainLLMWrapper
+from ragas.llms import llm_factory
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -21,18 +22,24 @@ async def test():
     
     # Define evaluator llm
     evaluator_llm = LangchainLLMWrapper(langchain_llm=base_llm)
+    scorer = Faithfulness(llm=evaluator_llm)
+
+    #Translate prompts into Danish
+    danish_prompts = await scorer.adapt_prompts(language='danish', llm=evaluator_llm)
+    scorer.set_prompts(**danish_prompts)
     
     sample = SingleTurnSample(
-        user_input="When was the first super bowl?",
-        response="The first superbowl was held on Jan 15, 1967",
+        user_input="Hvornår starter billetsalget til næste kamp?",
+        response="Billetsalget starter typisk 14 dage før kampen",
         retrieved_contexts=[
-            "The First AFL–NFL World Championship Game was an American football game played on January 15, 1967, at the Los Angeles Memorial Coliseum in Los Angeles.", "Johnny Madsen er født i Thyborøn engang i 1950'erne!!!"
+            "Billetsalget til FC Midtjyllands hjemmebanekampe åbner som regel 14 dage før kampene. Du kan se den specifikke åbningsdato for billetsalget på www.fcm.dk."
         ]
     )
     
-    scorer = Faithfulness(llm=evaluator_llm)
-    score = await scorer.single_turn_ascore(sample)
-    print(f"Faithfulness score: {score}")
-    return score
+
+    #score = await scorer.single_turn_ascore(sample)
+    #print(f"Faithfulness score: {score}")
+    print(danish_prompts)
+    return #score
 
 asyncio.run(test())
