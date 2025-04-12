@@ -43,10 +43,10 @@ def create_metrics_df() -> pd.DataFrame:
 
 # Function for various testing
 def test():
-    splits = indexing.split_data(chunk_size=800, chunk_overlap=200)
+    splits = indexing.split_data(chunk_size=1000, chunk_overlap=150)
     vectorstore = indexing.store_data(splits)
     question = "Hvornår starter billetsalget til næste kamp?"
-    chatbot.chatbot(vectorstore, question, 0.1, 3, 'similarity', OPENAI_API_KEY)
+    chatbot.chatbot(vectorstore, question, 0.25, 5, 'mmr', OPENAI_API_KEY)
 
 
 # Full experiment function
