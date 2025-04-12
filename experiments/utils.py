@@ -68,7 +68,7 @@ async def define_scorer_with_danish_prompts() -> dict:
         temperature=0.0,
         api_key=OPENAI_API_KEY
         )
-
+    
     # Define evaluator llm
     evaluator_llm = LangchainLLMWrapper(langchain_llm=base_llm)
 
@@ -82,7 +82,7 @@ async def define_scorer_with_danish_prompts() -> dict:
     danish_prompts_f = await scorer_f.adapt_prompts(language='danish', llm=evaluator_llm)
     scorer_f.set_prompts(**danish_prompts_f)
 
-    #Translate prompts into Danish (Faithfulness)
+    #Translate prompts into Danish (Context Relevance)
     danish_prompts_cr = await scorer_cr.adapt_prompts(language='danish', llm=evaluator_llm)
     scorer_cr.set_prompts(**danish_prompts_cr)
     return {
@@ -121,8 +121,8 @@ async def calculate_metrics(reference, candidate, question, context) -> dict:
     task = asyncio.create_task(calculate_ragas(candidate, question, context))
     
     # ROUGE Scores
-    rouge_scores = calculate_rouge_score(reference, candidate)
-    print(f'ROUGE-2 score: {rouge_scores['rouge2'].fmeasure}')
+    #rouge_scores = calculate_rouge_score(reference, candidate)
+    #print(f'ROUGE-2 score: {rouge_scores['rouge2'].fmeasure}')
 
     # Cosine Similarity
     cosine_sim = calculate_text_similarity(reference, candidate)
@@ -139,7 +139,7 @@ async def calculate_metrics(reference, candidate, question, context) -> dict:
     
     return {
         #'ROUGE-1': rouge_scores['rouge1'].fmeasure,
-        'ROUGE-2': rouge_scores['rouge2'].fmeasure,
+        #'ROUGE-2': rouge_scores['rouge2'].fmeasure,
         #'ROUGE-L': rouge_scores['rougeL'].fmeasure,
         'Cosine Similarity': cosine_sim,
         'Faithfulness': faithfulness_score,

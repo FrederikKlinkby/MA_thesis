@@ -35,7 +35,7 @@ def create_metrics_df() -> pd.DataFrame:
         len(settings['query expansion'])
     )
 
-    headers = ['ROUGE-2', 'Cosine Similarity', 'Faithfulness', 'Context Relevance']
+    headers = ['Cosine Similarity', 'Faithfulness', 'Context Relevance']
     df = pd.DataFrame(index=range(total_combinations), columns=headers)
     return df
 
@@ -96,8 +96,7 @@ async def full_experiment():
                             context=response['context'])
 
                         #Store metrics in df
-                        metrics.loc[row_counter, ['ROUGE-2', 'Cosine Similarity', 'Faithfulness', 'Context Relevance']] = [
-                            eval_metrics['ROUGE-2'],
+                        metrics.loc[row_counter, ['Cosine Similarity', 'Faithfulness', 'Context Relevance']] = [
                             eval_metrics['Cosine Similarity'],
                             eval_metrics['Faithfulness'],
                             eval_metrics['Context Relevance']
