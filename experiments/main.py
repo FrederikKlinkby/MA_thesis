@@ -35,7 +35,8 @@ def create_metrics_df() -> pd.DataFrame:
         len(settings['query expansion'])
     )
 
-    headers = ['Cosine Similarity', 'Faithfulness', 'Context Relevance']
+    headers = ['Chunk size', 'Temperature', 'k', 'Search type', 'Query expansion', 
+               'Cosine Similarity', 'Faithfulness', 'Context Relevance']
     df = pd.DataFrame(index=range(total_combinations), columns=headers)
     return df
 
@@ -96,7 +97,13 @@ async def full_experiment():
                             context=response['context'])
 
                         #Store metrics in df
-                        metrics.loc[row_counter, ['Cosine Similarity', 'Faithfulness', 'Context Relevance']] = [
+                        metrics.loc[row_counter, ['Chunk size', 'Temperature', 'k', 'Search type', 'Query expansion', 
+                                                  'Cosine Similarity', 'Faithfulness', 'Context Relevance']] = [
+                            chunk_size,
+                            t,
+                            k,
+                            search_type,
+                            query_expansion,
                             eval_metrics['Cosine Similarity'],
                             eval_metrics['Faithfulness'],
                             eval_metrics['Context Relevance']
@@ -105,8 +112,8 @@ async def full_experiment():
                         print('Run successful')
 
                         row_counter += 1
-                metrics.to_excel('rag_experiment_metrics.xlsx')
-                return
+    metrics.to_excel('rag_experiment_metrics.xlsx')
+    return
 
 # Main menu
 async def main():
