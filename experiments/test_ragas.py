@@ -48,7 +48,6 @@ async def test_ragas():
             eval_metrics['Context Relevance'],
             eval_metrics['Answer Relevance']
         ]
-    metrics.to_excel('test_ragas.xlsx')
-    return
+    return metrics.to_excel('test_ragas.xlsx')
 
 asyncio.run(test_ragas())

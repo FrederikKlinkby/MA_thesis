@@ -110,8 +110,7 @@ async def full_experiment():
                         print('Run successful')
 
                         row_counter += 1
-                metrics.to_excel('rag_experiment_metrics.xlsx')
-                return
+                return metrics.to_excel('rag_experiment_metrics.xlsx')
 
 # Main menu
 async def main():
