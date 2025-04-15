@@ -9,7 +9,6 @@ import asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.chatbot import chatbot
 import src.retrieval.indexing as indexing
-import utils
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -45,8 +44,8 @@ def create_metrics_df() -> pd.DataFrame:
 def test():
     splits = indexing.split_data(chunk_size=1000, chunk_overlap=150)
     vectorstore = indexing.store_data(splits)
-    question = "Hvornår starter billetsalget til næste kamp?"
-    chatbot.chatbot(vectorstore, question, 0.25, 5, 'mmr', OPENAI_API_KEY)
+    question = "Hvordan opgraderer jeg mit sæsonkort fra barn til voksen til en specifik kamp?"
+    chatbot.chatbot(vectorstore, question, 0.1, 5, 'mmr', OPENAI_API_KEY)
 
 
 # Full experiment function
@@ -130,6 +129,7 @@ async def main():
         if experiment == 'Test':
             test()
         elif experiment == 'Full experiment':
+            import utils
             await full_experiment()
         else:
             print("Exit")
