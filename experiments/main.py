@@ -9,6 +9,7 @@ import asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.chatbot import chatbot
 import src.retrieval.indexing as indexing
+import utils
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -42,10 +43,8 @@ def create_metrics_df() -> pd.DataFrame:
 
 # Function for various testing
 def test():
-    splits = indexing.split_data(chunk_size=1000, chunk_overlap=150)
-    vectorstore = indexing.store_data(splits)
-    question = "Hvordan opgraderer jeg mit sæsonkort fra barn til voksen til en specifik kamp?"
-    chatbot.chatbot(vectorstore, question, 0.1, 5, 'mmr', OPENAI_API_KEY)
+    #Testing
+    return
 
 
 # Full experiment function
@@ -55,7 +54,7 @@ async def full_experiment():
     question = "Hvornår starter billetsalget til næste kamp?"
     reference = "Billetsalget til FC Midtjyllands hjemmebanekampe åbner som regel 14 dage før kampene. Du kan se den specifikke åbningsdato for billetsalget på www.fcm.dk."
 
-    #Create empty dataframe for eval metrics
+    # Create empty dataframe for eval metrics
     metrics = create_metrics_df()
 
     # Counter to track current row in metrics DataFrame
@@ -111,8 +110,8 @@ async def full_experiment():
                         print('Run successful')
 
                         row_counter += 1
-    metrics.to_excel('rag_experiment_metrics.xlsx')
-    return
+                metrics.to_excel('rag_experiment_metrics.xlsx')
+                return
 
 # Main menu
 async def main():
@@ -127,9 +126,8 @@ async def main():
     if experiment_type:
         experiment = experiment_type['Type of experiment']
         if experiment == 'Test':
-            test()
+            await test()
         elif experiment == 'Full experiment':
-            import utils
             await full_experiment()
         else:
             print("Exit")

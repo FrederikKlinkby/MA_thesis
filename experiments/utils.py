@@ -3,10 +3,10 @@ import numpy as np
 from openai import OpenAI
 from dotenv import find_dotenv, load_dotenv
 import asyncio
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from rouge_score import rouge_scorer
 from ragas.dataset_schema import SingleTurnSample
-from ragas.metrics import Faithfulness, LLMContextPrecisionWithoutReference #See following for available metrics: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/#agents-or-tool-use-cases
+from ragas.metrics import Faithfulness, LLMContextPrecisionWithoutReference, ResponseRelevancy #See following for available metrics: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/#agents-or-tool-use-cases
 from ragas.integrations.langchain import LangchainLLMWrapper
 
 dotenv_path = find_dotenv()
@@ -78,6 +78,10 @@ async def define_scorer_with_danish_prompts() -> dict:
     # Context relevancy
     scorer_cr = LLMContextPrecisionWithoutReference(llm=evaluator_llm)
 
+    # Answer relevancy
+    evaluator_embeddings = OpenAIEmbeddings()
+    scorer_ar = ResponseRelevancy(llm=evaluator_llm, embeddings=evaluator_embeddings)
+
     #Translate prompts into Danish (Faithfulness)
     danish_prompts_f = await scorer_f.adapt_prompts(language='danish', llm=evaluator_llm)
     scorer_f.set_prompts(**danish_prompts_f)
@@ -85,15 +89,22 @@ async def define_scorer_with_danish_prompts() -> dict:
     #Translate prompts into Danish (Context Relevance)
     danish_prompts_cr = await scorer_cr.adapt_prompts(language='danish', llm=evaluator_llm)
     scorer_cr.set_prompts(**danish_prompts_cr)
+
+    #Translate prompts into Danish (Answer Relevance)
+    danish_prompts_ar = await scorer_ar.adapt_prompts(language='danish', llm=evaluator_llm)
+    scorer_ar.set_prompts(**danish_prompts_ar)
+
     return {
         "faithfulness_scorer": scorer_f,
-        "context_relevance_scorer": scorer_cr
+        "context_relevance_scorer": scorer_cr,
+        "answer_relevance_scorer": scorer_ar
     }
 
 # Get scorer objects in memory
 scorer_dict = asyncio.run(define_scorer_with_danish_prompts())
 scorer_f = scorer_dict["faithfulness_scorer"]
 scorer_cr = scorer_dict["context_relevance_scorer"]
+scorer_ar = scorer_dict["answer_relevance_scorer"]
 
 # Function for calculating RAGAs
 async def calculate_ragas(candidate, question, context) -> dict:
@@ -110,9 +121,13 @@ async def calculate_ragas(candidate, question, context) -> dict:
     # Context relevancy
     context_relevance_score = await scorer_cr.single_turn_ascore(sample)
 
+    # Answer relevancy
+    answer_relevance_score = await scorer_ar.single_turn_ascore(sample)
+
     return {
         "faithfulness_score": faithfulness_score,
-        "context_relevance_score": context_relevance_score
+        "context_relevance_score": context_relevance_score,
+        "answer_relevance_score": answer_relevance_score
     }
 
 # Evaluation function
@@ -128,14 +143,16 @@ async def calculate_metrics(reference, candidate, question, context) -> dict:
     cosine_sim = calculate_text_similarity(reference, candidate)
     print(f'Cosine similarity: {cosine_sim}')
 
-    # Await RAGAs metrics
+    # Await RAGAS metrics
     ragas_scores = await task
 
-    #Faithfulness and Context Relevance
+    # RAGAS
     faithfulness_score = ragas_scores['faithfulness_score']
     print(f'Faithfulness score: {faithfulness_score}')
     context_relevance_score = ragas_scores['context_relevance_score']
     print(f'Context relevance score: {context_relevance_score}')
+    answer_relevance_score = ragas_scores['answer_relevance_score']
+    print(f'Answer relevance score: {answer_relevance_score}')
     
     return {
         #'ROUGE-1': rouge_scores['rouge1'].fmeasure,
@@ -143,5 +160,6 @@ async def calculate_metrics(reference, candidate, question, context) -> dict:
         #'ROUGE-L': rouge_scores['rougeL'].fmeasure,
         'Cosine Similarity': cosine_sim,
         'Faithfulness': faithfulness_score,
-        'Context Relevance': context_relevance_score
+        'Context Relevance': context_relevance_score,
+        'Answer Relevance': answer_relevance_score
     }
