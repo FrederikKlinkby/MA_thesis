@@ -60,9 +60,10 @@ def split_data(chunk_size, chunk_overlap, web_paths=web_paths, num_splits=False)
 
 # Function for storing the splits made in split_data() in a Chroma vector store
 def store_data(splits):
-     vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY, model='text-embedding-3-large'))
+    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(api_key=OPENAI_API_KEY, model='text-embedding-3-large'))
 
-     if not vectorstore:
+    if not vectorstore:
          print('Vectorstore not created')
-     return vectorstore
+    else:
+        return vectorstore
 
